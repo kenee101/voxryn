@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import TestSanity from "./pages/TestSanity";
 import { Element } from "react-scroll";
 import { motion } from "motion/react";
 import HeroSection from "./components/HeroSection";
@@ -8,12 +7,13 @@ import Features from "./components/Features";
 import Products from "./components/Products";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
-// import WhatsAppFAB from "./components/WhatappFAB";
 import { MessageCircle } from "lucide-react";
+// import WhatsAppFAB from "./components/WhatappFAB";
+// import TestSanity from "./pages/TestSanity";
 
 function Home() {
-  const whatsappNumber = "08033279599";
-  const whatsappMessage = "Hi! I'm interested in OliveCrafts products.";
+  const whatsappNumber = "+2348033279599";
+  const whatsappMessage = "Hi! I'm interested in Voxryn products.";
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900">
@@ -71,7 +71,7 @@ function Home() {
         {/* WhatsApp Button */}
         <motion.a
           href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-            whatsappMessage
+            whatsappMessage,
           )}`}
           target="_blank"
           rel="noopener noreferrer"

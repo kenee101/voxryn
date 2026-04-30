@@ -15,80 +15,52 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      if (isMenuOpen) setIsMenuOpen(false);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   return (
-    <header
-      className={`fixed top-5 left-25 right-0 w-[calc(100%-12rem)] z-50 rounded-full transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 opacity-80 backdrop-blur-2xl shadow-sm"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="max-w-7xl px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-2xl font-bold">
-          <img
-            src="/olivecrafts-logo.jpg"
-            alt="OliveCrafts Logo"
-            className="h-16 w-16 object-contain rounded-2xl"
-          />
-          <span className="hidden md:block bg-linear-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text">
-            OliveCrafts Organics
-          </span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              activeClass="text-emerald-600 after:w-full font-medium"
-              to={item.id}
-              spy={true}
-              smooth={true}
-              offset={-80}
-              duration={500}
-              className="cursor-pointer hover:text-emerald-600 transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 after:w-0 hover:after:w-full"
-            >
-              {item.label}
-            </Link>
-          ))}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-2xl shadow-sm py-3"
+            : "bg-transparent py-5"
+        } ${isMenuOpen ? "bg-white/95 backdrop-blur-2xl" : ""}`}
+      >
+        <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link
-            to="products"
+            to="home"
             spy={true}
             smooth={true}
             offset={-80}
             duration={500}
-            className="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="flex items-center gap-2 text-2xl font-bold cursor-pointer"
           >
-            Shop Now
+            <img
+              src="/voxryn-logo.jpg"
+              alt="Voxryn Logo"
+              className="h-12 w-12 md:h-14 md:w-14 object-contain rounded-xl"
+            />
+            <span className="hidden sm:block text-emerald-700">Voxryn</span>
           </Link>
-        </div>
 
-        <button
-          className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X /> : <Menu />}
-        </button>
-      </nav>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden rounded-full bg-white border-t animate-fade-in">
-          <div className="px-6 py-4 flex flex-col gap-4">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.id}
-                activeClass="text-emerald-600 after:w-full font-medium"
+                activeClass="text-emerald-600 font-medium"
                 to={item.id}
                 spy={true}
                 smooth={true}
                 offset={-80}
                 duration={500}
-                className="cursor-pointer hover:text-emerald-600 transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 after:w-0 hover:after:w-full"
+                onClick={() => setIsMenuOpen(false)}
+                className="cursor-pointer text-gray-700 hover:text-emerald-600 transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 after:w-0 hover:after:w-full text-sm lg:text-base"
               >
                 {item.label}
               </Link>
@@ -99,14 +71,77 @@ const Header = () => {
               smooth={true}
               offset={-80}
               duration={500}
-              className="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              onClick={() => setIsMenuOpen(false)}
+              className="bg-emerald-600 text-white px-5 py-2 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 cursor-pointer text-sm lg:text-base font-medium"
             >
               Shop Now
             </Link>
           </div>
+
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </nav>
+      </header>
+
+      {/* Mobile Menu Backdrop */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="fixed top-0 right-0 h-full w-64 bg-white z-50 md:hidden shadow-xl transform transition-transform duration-300 ease-in-out">
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-xl font-bold text-emerald-700">Menu</span>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <div className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.id}
+                  activeClass="text-emerald-600 font-medium"
+                  to={item.id}
+                  spy={true}
+                  smooth={true}
+                  offset={-80}
+                  duration={500}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="cursor-pointer text-gray-700 hover:text-emerald-600 transition-colors py-2 text-lg"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                to="products"
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={500}
+                onClick={() => setIsMenuOpen(false)}
+                className="bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 cursor-pointer text-center font-medium mt-4"
+              >
+                Shop Now
+              </Link>
+            </div>
+          </div>
         </div>
       )}
-    </header>
+    </>
   );
 };
 

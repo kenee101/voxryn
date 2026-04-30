@@ -1,4 +1,3 @@
-/// Test Sanity connection using the MCP configuration
 import { createClient } from "@sanity/client";
 import { type SanityDocument } from "@sanity/client";
 
@@ -37,7 +36,7 @@ if (import.meta.env.DEV) {
     if (!success) {
       console.log("\nTroubleshooting tips:");
       console.log(
-        "1. Make sure your .env.local file exists with VITE_SANITY_PROJECT_ID and VITE_SANITY_API_TOKEN"
+        "1. Make sure your .env.local file exists with VITE_SANITY_PROJECT_ID and VITE_SANITY_API_TOKEN",
       );
       console.log("2. Verify your Sanity token has the correct permissions");
       console.log("3. Check that your project ID is correct");

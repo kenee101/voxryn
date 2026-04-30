@@ -5,11 +5,11 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="flex items-center gap-2 text-xl font-bold">
             <img
-              src="/olivecrafts-logo.jpg"
-              alt="OliveCrafts Logo"
+              src="/voxryn-logo.jpg"
+              alt="Voxryn Logo"
               className="h-16 w-16 object-contain rounded-2xl"
             />
-            OliveCrafts Organics
+            Voxryn
           </div>
           <p className="text-stone-400">
             Premium organic products for a healthier lifestyle
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-stone-800 text-center text-stone-400">
-        © 2025 OliveCrafts. All rights reserved.
+        © 2026 Voxryn. All rights reserved.
       </div>
     </footer>
   );

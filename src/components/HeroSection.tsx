@@ -1,4 +1,5 @@
 import { ArrowRight, Star } from "lucide-react";
+import photo from "../assets/photo_2026-04-30_10-03-20.jpg";
 
 const HeroSection = () => {
   return (
@@ -32,9 +33,13 @@ const HeroSection = () => {
           <div className="absolute -top-10 -right-10 w-72 h-72 bg-emerald-100 rounded-full blur-3xl opacity-50"></div>
           <div className="relative bg-white rounded-3xl p-8 shadow-xl">
             <img
-              src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&h=600&fit=crop"
-              alt="Organic products"
-              className="w-full h-80 object-cover rounded-2xl"
+              // src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&h=600&fit=crop"
+              src={photo}
+              alt="Organic product"
+              className="w-full h-full object-cover rounded-2xl"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="high"
             />
             <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-lg p-6">
               <div className="flex items-center gap-3">

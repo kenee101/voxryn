@@ -168,7 +168,10 @@ const Products = () => {
                     </p>
                     <div className="flex items-center justify-around mb-4">
                       <span className="text-2xl font-bold text-emerald-600">
-                        ${product.price}
+                        {new Intl.NumberFormat("en-NG", {
+                          style: "currency",
+                          currency: "NGN",
+                        }).format(product.price)}
                       </span>
                       <button
                         className="bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition-all hover:scale-110 active:scale-95"
@@ -177,9 +180,9 @@ const Products = () => {
                         <ShoppingBag className="w-5 h-5" />
                       </button>
                     </div>
-                    <span className="text-md font-bold text-emerald-600">
+                    {/* <span className="text-md font-bold text-emerald-600">
                       {product.stock} products left
-                    </span>
+                    </span> */}
                   </div>
                 </div>
               </SwiperSlide>
