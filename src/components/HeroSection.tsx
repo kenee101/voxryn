@@ -3,7 +3,7 @@ import photo from "../assets/photo_2026-04-30_10-03-20.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="pt-32 pb-20 px-6">
+    <section className="pt-36 pb-20 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 animate-slide-up">
           <div className="inline-block px-4 py-2 bg-emerald-50 rounded-full text-emerald-700 text-sm font-medium">

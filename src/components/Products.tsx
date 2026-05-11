@@ -1,4 +1,4 @@
-import { ShoppingBag, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingBag, Star, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -74,6 +74,11 @@ const Products = () => {
   const navigationNextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
   const [products, setProducts] = useState<SanityDocument[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<SanityDocument | null>(
+    null,
+  );
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -88,17 +93,55 @@ const Products = () => {
         };
       });
       setProducts(modifiedProducts);
-      console.log(modifiedProducts);
+      // console.log(modifiedProducts);
     })();
   }, []);
+
+  const openModal = (product: SanityDocument, index: number) => {
+    setSelectedProduct(product);
+    setSelectedIndex(index);
+    setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+    document.body.style.overflow = "unset";
+  };
+
+  const navigatePrev = () => {
+    const newIndex =
+      selectedIndex === 0 ? products.length - 1 : selectedIndex - 1;
+    setSelectedProduct(products[newIndex]);
+    setSelectedIndex(newIndex);
+  };
+
+  const navigateNext = () => {
+    const newIndex =
+      selectedIndex === products.length - 1 ? 0 : selectedIndex + 1;
+    setSelectedProduct(products[newIndex]);
+    setSelectedIndex(newIndex);
+  };
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isModalOpen) return;
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft") navigatePrev();
+      if (e.key === "ArrowRight") navigateNext();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isModalOpen, selectedIndex]);
 
   return (
     <section id="products" className="py-20 px-4 sm:px-6 relative">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Featured Products
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Products</h2>
           <p className="text-xl text-stone-600">
             Handpicked organic essentials for a healthier you
           </p>
@@ -147,10 +190,13 @@ const Products = () => {
               swiper.pagination.render();
             }}
           >
-            {products.map((product) => (
+            {products.map((product, index) => (
               <SwiperSlide key={product._id}>
                 <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full mx-2">
-                  <div className="relative overflow-hidden aspect-square">
+                  <div
+                    className="relative overflow-hidden aspect-square cursor-pointer"
+                    onClick={() => openModal(product, index)}
+                  >
                     <img
                       src={product.image}
                       alt={product.name}
@@ -176,6 +222,7 @@ const Products = () => {
                       <button
                         className="bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition-all hover:scale-110 active:scale-95"
                         aria-label={`Add ${product.name} to cart`}
+                        onClick={() => openModal(product, index)}
                       >
                         <ShoppingBag className="w-5 h-5" />
                       </button>
@@ -211,6 +258,68 @@ const Products = () => {
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      {isModalOpen && selectedProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+
+          {/* Modal Content */}
+          <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-2 right-4 z-20 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+              aria-label="Close modal"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={navigatePrev}
+              className="absolute left-4 z-20 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-colors"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+            <button
+              onClick={navigateNext}
+              className="absolute right-4 z-20 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-colors"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+
+            {/* Image */}
+            <img
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+            />
+
+            {/* Product Info */}
+            <div className="mt-4 text-center text-white">
+              <h3 className="text-2xl font-bold mb-2">
+                {selectedProduct.name}
+              </h3>
+              <p className="text-stone-300 text-sm mb-2 line-clamp-2 max-w-2xl mx-auto">
+                {selectedProduct.description}
+              </p>
+              <span className="text-xl font-semibold text-emerald-400">
+                {new Intl.NumberFormat("en-NG", {
+                  style: "currency",
+                  currency: "NGN",
+                }).format(selectedProduct.price)}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         .swiper-pagination-bullet {

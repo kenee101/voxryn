@@ -6,6 +6,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const whatsappNumber = "+2348033279599";
+  const whatsappMessage = "Hi! I'm interested in Voxryn products.";
+
   const navItems = [
     { id: "home", label: "Home" },
     { id: "features", label: "Features" },
@@ -44,7 +47,7 @@ const Header = () => {
             <img
               src="/voxryn-logo.jpg"
               alt="Voxryn Logo"
-              className="h-12 w-12 md:h-14 md:w-14 object-contain rounded-xl"
+              className="h-32 w-32 md:h-24 md:w-24 object-contain rounded-xl"
             />
             <span className="hidden sm:block text-emerald-700">Voxryn</span>
           </Link>
@@ -65,17 +68,14 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
-            <Link
-              to="products"
-              spy={true}
-              smooth={true}
-              offset={-80}
-              duration={500}
-              onClick={() => setIsMenuOpen(false)}
+            <a
+              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                whatsappMessage,
+              )}`}
               className="bg-emerald-600 text-white px-5 py-2 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 cursor-pointer text-sm lg:text-base font-medium"
             >
               Shop Now
-            </Link>
+            </a>
           </div>
 
           <button
@@ -126,17 +126,14 @@ const Header = () => {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                to="products"
-                spy={true}
-                smooth={true}
-                offset={-80}
-                duration={500}
-                onClick={() => setIsMenuOpen(false)}
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                  whatsappMessage,
+                )}`}
                 className="bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 active:scale-95 cursor-pointer text-center font-medium mt-4"
               >
                 Shop Now
-              </Link>
+              </a>
             </div>
           </div>
         </div>

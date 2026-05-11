@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import HeroSection from "./components/HeroSection";
 import Header from "./components/Header";
 import Features from "./components/Features";
+import FeaturedProducts from "./components/FeaturedProducts";
 import Products from "./components/Products";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
@@ -39,6 +40,9 @@ function Home() {
         <Element name="features" className="section">
           <Features />
         </Element>
+
+        {/* Featured Products (Mobile Only) */}
+        <FeaturedProducts />
 
         {/* Products */}
         <Element name="products" className="section bg-white">

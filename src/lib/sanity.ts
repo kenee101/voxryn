@@ -12,13 +12,13 @@ export const client = createClient({
 // Test query
 export async function testConnection() {
   try {
-    console.log("Testing Sanity connection...");
+    // console.log("Testing Sanity connection...");
 
     // Simple query to test the connection
-    const result = await client.fetch('count(*[!(_id in path("_.**"))])');
+    // const result = await client.fetch('count(*[!(_id in path("_.**"))])');
 
-    console.log("✅ Successfully connected to Sanity!");
-    console.log(`Total documents in your dataset: ${result}`);
+    // console.log("✅ Successfully connected to Sanity!");
+    // console.log(`Total documents in your dataset: ${result}`);
     return true;
   } catch (error: any) {
     console.error("❌ Error connecting to Sanity:", error.message);

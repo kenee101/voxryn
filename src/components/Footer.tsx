@@ -16,14 +16,14 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex items-center justify-around">
-          <div className="flex flex-col items-center justify-center">
+          {/* <div className="flex flex-col items-center justify-center">
             <h4 className="font-bold mb-4">Shop</h4>
             <div className="space-y-2 text-stone-400">
               <div>All Products</div>
               <div>New Arrivals</div>
               <div>Best Sellers</div>
             </div>
-          </div>
+          </div> */}
           <div className="flex flex-col items-center justify-center">
             <h4 className="font-bold mb-4">Company</h4>
             <div className="space-y-2 text-stone-400">
@@ -37,7 +37,7 @@ const Footer = () => {
             <div className="space-y-2 text-stone-400">
               <div>Instagram</div>
               <div>Facebook</div>
-              <div>Twitter</div>
+              <div>TikTok</div>
             </div>
           </div>
         </div>
