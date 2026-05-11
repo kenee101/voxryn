@@ -10,7 +10,7 @@ const FeaturedProducts = () => {
     (async () => {
       const sanityProducts = await getProducts();
       // Take first 2 products
-      const firstTwoProducts = [sanityProducts[3], sanityProducts[5]];
+      const firstTwoProducts = [sanityProducts[2], sanityProducts[4]];
       const featuredProducts = firstTwoProducts.map(
         (product: SanityDocument) => {
           return {

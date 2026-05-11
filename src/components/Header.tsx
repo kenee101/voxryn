@@ -45,7 +45,7 @@ const Header = () => {
             className="flex items-center gap-2 text-2xl font-bold cursor-pointer"
           >
             <img
-              src="/voxryn-logo.jpg"
+              src="/voxryn-logo-preview.png"
               alt="Voxryn Logo"
               className="h-32 w-32 md:h-24 md:w-24 object-contain rounded-xl"
             />
