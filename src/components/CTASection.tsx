@@ -12,7 +12,9 @@ const CTASection = () => {
           Join thousands of happy customers choosing organic
         </p>
         <a
-          href="#"
+          href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+            whatsappMessage,
+          )}`}
           className="bg-white text-emerald-600 px-10 py-4 rounded-full hover:bg-stone-100 transition-all hover:scale-105 font-bold text-lg"
         >
           Shop With Us
