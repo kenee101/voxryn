@@ -1,5 +1,6 @@
 import { ArrowRight, Star } from "lucide-react";
 import photo from "../assets/photo_2026-04-30_10-03-20.jpg";
+import { Link as ScrollLink } from "react-scroll";
 
 const HeroSection = () => {
   return (
@@ -20,10 +21,28 @@ const HeroSection = () => {
             table. Health starts here.
           </p>
           <div className="flex gap-4 pt-4 justify-center">
-            <button className="bg-emerald-600 text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 flex items-center gap-2">
+            {/* <button
+              onClick={() => (window.location.href = "/products")}
+              className="bg-emerald-600 text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition-all hover:scale-105 flex items-center gap-2"
+            >
               Explore Products <ArrowRight className="w-5 h-5" />
+            </button> */}
+            <button>
+              <ScrollLink
+                key="products"
+                activeClass="text-emerald-600 font-medium"
+                to="products"
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={500}
+                // onClick={() => setIsMenuOpen(false)}
+                className="flex gap-2 cursor-pointer text-gray-700 hover:text-emerald-600 transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-emerald-600 after:transition-all after:duration-300 after:w-0 hover:after:w-full text-sm lg:text-base"
+              >
+                Explore Products <ArrowRight className="w-5 h-5" />
+              </ScrollLink>
             </button>
-            <button className="border-2 border-stone-300 px-8 py-4 rounded-full hover:border-emerald-600 hover:text-emerald-600 transition-all">
+            <button className="px-8 py-4 rounded-full text-emerald-600 hover:bg-emerald-50 transition-all">
               Learn More
             </button>
           </div>
